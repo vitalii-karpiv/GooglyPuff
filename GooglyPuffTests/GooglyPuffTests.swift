@@ -37,15 +37,18 @@ private let defaultTimeoutLengthInSeconds: Int = 10 // 10 Seconds
 
 class GooglyPuffTests: XCTestCase {
   func testLotsOfFacesImageURL() {
-    downloadImageURL(withString: PhotoURLString.lotsOfFaces)
+//    downloadImageURL(withString: PhotoURLString.lotsOfFaces)
+      XCTFail("Not implemented!")
   }
 
   func testSuccessKidImageURL() {
-    downloadImageURL(withString: PhotoURLString.successKid)
+//    downloadImageURL(withString: PhotoURLString.successKid)
+      XCTFail("Not implemented!")
   }
 
   func testOverlyAttachedGirlfriendImageURL() {
-    downloadImageURL(withString: PhotoURLString.overlyAttachedGirlfriend)
+//    downloadImageURL(withString: PhotoURLString.overlyAttachedGirlfriend)
+      XCTFail("Not implemented!")
   }
 
   func downloadImageURL(withString urlString: String) {
