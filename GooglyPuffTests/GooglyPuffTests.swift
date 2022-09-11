@@ -37,21 +37,40 @@ private let defaultTimeoutLengthInSeconds: Int = 10 // 10 Seconds
 
 class GooglyPuffTests: XCTestCase {
   func testLotsOfFacesImageURL() {
-//    downloadImageURL(withString: PhotoURLString.lotsOfFaces)
-      XCTFail("Not implemented!")
+    downloadImageURL(withString: PhotoURLString.lotsOfFaces)
+//      XCTFail("Not implemented!")
   }
 
   func testSuccessKidImageURL() {
-//    downloadImageURL(withString: PhotoURLString.successKid)
-      XCTFail("Not implemented!")
+    downloadImageURL(withString: PhotoURLString.successKid)
+//      XCTFail("Not implemented!")
   }
 
   func testOverlyAttachedGirlfriendImageURL() {
-//    downloadImageURL(withString: PhotoURLString.overlyAttachedGirlfriend)
-      XCTFail("Not implemented!")
+    downloadImageURL(withString: PhotoURLString.overlyAttachedGirlfriend)
+//      XCTFail("Not implemented!")
   }
 
   func downloadImageURL(withString urlString: String) {
-    XCTFail("Not implemented!")
+    
+    let url = try! XCTUnwrap(URL(string: urlString))
+
+    // 1
+    let semaphore = DispatchSemaphore(value: 0)
+    _ = DownloadPhoto(url: url) { _, error in
+      if let error = error {
+        XCTFail("\(urlString) failed. \(error.localizedDescription)")
+      }
+
+      // 2
+      semaphore.signal()
+    }
+    let timeout = DispatchTime.now() + .seconds(defaultTimeoutLengthInSeconds)
+
+    // 3
+    if semaphore.wait(timeout: timeout) == .timedOut {
+      XCTFail("\(urlString) timed out")
+    }
+
   }
 }
